@@ -55,10 +55,12 @@ RUN $HADOOP_PREFIX/bin/hdfs namenode -format
 
 #hbase
 ENV HBASE_VERSION 1.1.2
+ENV HBASE_HOME /opt/hbase
 
 RUN mkdir -p /opt/downloads && cd /opt/downloads && curl -SsfLO "http://archive.apache.org/dist/hbase/hbase-$HBASE_VERSION/hbase-$HBASE_VERSION.tar.gz"
 RUN cd /opt && tar xvfz /opt/downloads/hbase-$HBASE_VERSION.tar.gz
 RUN mv /opt/hbase-$HBASE_VERSION /opt/hbase
+ADD hbase-site.xml HBASE_HOME/conf/hbase-site.xml
 
 
 # fixing the libhadoop.so like a boss
