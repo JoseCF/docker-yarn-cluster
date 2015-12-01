@@ -14,6 +14,8 @@ service sshd start
 if [[ $1 = "-namenode" || $2 = "-namenode" ]]; then
   $HADOOP_PREFIX/sbin/start-dfs.sh
   $HADOOP_PREFIX/sbin/start-yarn.sh
+  #Start HBASE
+  $HBASE_HOME/bin/start-hbase.sh
 fi
 
 if [[ $1 = "-datanode" || $2 = "-datanode" ]]; then
