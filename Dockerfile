@@ -53,6 +53,14 @@ ADD yarn-site.xml $HADOOP_PREFIX/etc/hadoop/yarn-site.xml
 
 RUN $HADOOP_PREFIX/bin/hdfs namenode -format
 
+#hbase
+ENV HBASE_VERSION 1.1.2
+
+RUN mkdir -p /opt/downloads && cd /opt/downloads && curl -SsfLO "http://archive.apache.org/dist/hbase/hbase-$HBASE_VERSION/hbase-$HBASE_VERSION.tar.gz"
+RUN cd /opt && tar xvfz /opt/downloads/hbase-$HBASE_VERSION.tar.gz
+RUN mv /opt/hbase-$HBASE_VERSION /opt/hbase
+
+
 # fixing the libhadoop.so like a boss
 RUN rm  /usr/local/hadoop/lib/native/*
 RUN curl -Ls http://dl.bintray.com/sequenceiq/sequenceiq-bin/hadoop-native-64-2.7.0.tar | tar -x -C /usr/local/hadoop/lib/native/
